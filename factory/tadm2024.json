@@ -1,0 +1,9 @@
+{
+	"name": "tadm2024",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "958ec6e2-90dd-414e-850f-3c0be1059925",
+		"tenantId": "c20f0255-6bbb-4cb6-96fb-ef864f6628a4"
+	}
+}
