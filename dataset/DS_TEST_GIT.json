@@ -1,0 +1,17 @@
+{
+	"name": "DS_TEST_GIT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_StorageAccount",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "adfdemo"
+			}
+		}
+	}
+}
