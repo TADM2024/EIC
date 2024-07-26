@@ -12,10 +12,16 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": ""
+					"variableName": "Varint",
+					"value": "45"
 				}
 			}
 		],
+		"variables": {
+			"Varint": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
