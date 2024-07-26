@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "tadm2024"
+		},
+		"LS_SQLDB_password": {
+			"value": ""
+		},
+		"LS_StorageAccount_connectionString": {
+			"value": ""
+		},
+		"LS_SQLDB_properties_typeProperties_server": {
+			"value": "tadm2024.database.windows.net"
+		},
+		"LS_SQLDB_properties_typeProperties_database": {
+			"value": "ADF_DEMO"
+		},
+		"LS_SQLDB_properties_typeProperties_userName": {
+			"value": "admintadm"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
