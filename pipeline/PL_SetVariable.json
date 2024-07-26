@@ -1,5 +1,5 @@
 {
-	"name": "pipeline2",
+	"name": "PL_SetVariable",
 	"properties": {
 		"activities": [
 			{
@@ -10,7 +10,10 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": ""
+				}
 			}
 		],
 		"annotations": []
