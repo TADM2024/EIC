@@ -134,7 +134,7 @@
 		],
 		"variables": {
 			"VarFile": {
-				"type": "String"
+				"type": "Boolean"
 			}
 		},
 		"annotations": []
