@@ -145,6 +145,12 @@
 					],
 					"timeout": "0.12:00:00"
 				}
+			},
+			{
+				"name": "Fail1",
+				"type": "Fail",
+				"dependsOn": [],
+				"userProperties": []
 			}
 		],
 		"variables": {
