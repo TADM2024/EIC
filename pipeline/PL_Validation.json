@@ -29,7 +29,8 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"message": "HI "
+					"message": "File doesnt exist . Please contact BA's",
+					"errorCode": "100"
 				}
 			}
 		],
