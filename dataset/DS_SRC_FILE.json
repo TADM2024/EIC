@@ -1,0 +1,19 @@
+{
+	"name": "DS_SRC_FILE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_StorageAccount",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "TbRavi11.txt",
+				"folderPath": "Output",
+				"container": "adfdemo"
+			}
+		}
+	}
+}
