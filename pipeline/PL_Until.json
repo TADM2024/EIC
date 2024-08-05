@@ -8,6 +8,10 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
+					"expression": {
+						"value": "@variables('VarFile')",
+						"type": "Expression"
+					},
 					"activities": [
 						{
 							"name": "Get Metadata1",
