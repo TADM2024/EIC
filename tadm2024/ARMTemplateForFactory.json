@@ -201,6 +201,278 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_Until')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Until1",
+						"type": "Until",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@variables('VarFile')",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Get Metadata1",
+									"type": "GetMetadata",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "DS_SRC_FILE",
+											"type": "DatasetReference",
+											"parameters": {}
+										},
+										"fieldList": [
+											"exists"
+										],
+										"storeSettings": {
+											"type": "AzureBlobStorageReadSettings",
+											"recursive": true,
+											"enablePartitionDiscovery": false
+										},
+										"formatSettings": {
+											"type": "BinaryReadSettings"
+										}
+									}
+								},
+								{
+									"name": "Set variable1",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "Get Metadata1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "VarFile",
+										"value": {
+											"value": "@activity('Get Metadata1').output.exists",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "If Condition1",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "Set variable1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@variables('VarFile')",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Wait1",
+												"type": "Wait",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"waitTimeInSeconds": 10
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Copy data1",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "BinarySource",
+														"storeSettings": {
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true
+														},
+														"formatSettings": {
+															"type": "BinaryReadSettings"
+														}
+													},
+													"sink": {
+														"type": "BinarySink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														}
+													},
+													"enableStaging": false
+												},
+												"inputs": [
+													{
+														"referenceName": "DS_SRC_FILE",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_SINK_FILE",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												]
+											}
+										]
+									}
+								}
+							],
+							"timeout": "0.12:00:00"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"VarFile": {
+						"type": "Boolean"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_SRC_FILE')]",
+				"[concat(variables('factoryId'), '/datasets/DS_SINK_FILE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_Validation')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Validation1",
+						"type": "Validation",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DS_SRC_FILE",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"timeout": "0.00:01:00",
+							"sleep": 10
+						}
+					},
+					{
+						"name": "Fail1",
+						"type": "Fail",
+						"dependsOn": [
+							{
+								"activity": "Validation1",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"message": "File doesnt exist . Please contact BA's",
+							"errorCode": "100"
+						}
+					},
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Validation1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_SRC_FILE",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_SINK_FILE",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_SRC_FILE')]",
+				"[concat(variables('factoryId'), '/datasets/DS_SINK_FILE')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_Wait')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -271,6 +543,29 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_SINK_FILE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_StorageAccount",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "ADFTESTING",
+						"container": "output"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_StorageAccount')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_SQL')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -297,6 +592,30 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/LS_SQLDB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SRC_FILE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_StorageAccount",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "TbRavi11.txt",
+						"folderPath": "Output",
+						"container": "adfdemo"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_StorageAccount')]"
 			]
 		},
 		{
