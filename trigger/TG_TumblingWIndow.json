@@ -1,0 +1,21 @@
+{
+	"name": "TG_TumblingWIndow",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"type": "TumblingWindowTrigger",
+		"typeProperties": {
+			"frequency": "Hour",
+			"interval": 1,
+			"startTime": "2024-06-01T05:09:00Z",
+			"endTime": "2024-08-15T05:09:00Z",
+			"delay": "00:00:10",
+			"maxConcurrency": 5,
+			"retryPolicy": {
+				"count": 2,
+				"intervalInSeconds": 30
+			},
+			"dependsOn": []
+		}
+	}
+}
