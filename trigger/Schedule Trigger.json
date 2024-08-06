@@ -2,22 +2,15 @@
 	"name": "Schedule Trigger",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
-		"pipelines": [
-			{
-				"pipelineReference": {
-					"referenceName": "PL_Validation",
-					"type": "PipelineReference"
-				}
-			}
-		],
+		"runtimeState": "Stopped",
+		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
 				"frequency": "Minute",
 				"interval": 2,
-				"startTime": "2024-08-06T08:43:00",
-				"endTime": "2024-08-16T08:43:00",
+				"startTime": "2024-08-06T08:49:00",
+				"endTime": "2024-08-16T08:49:00",
 				"timeZone": "India Standard Time"
 			}
 		}
