@@ -2,7 +2,7 @@
 	"name": "TG_Storage",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
