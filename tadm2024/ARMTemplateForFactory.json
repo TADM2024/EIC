@@ -26,6 +26,10 @@
 		"LS_SQLDB_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "admintadm"
+		},
+		"TG_Storage_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/d38e295c-935f-422a-b557-6b00aee34e0e/resourceGroups/TadmTraining2024/providers/Microsoft.Storage/storageAccounts/blob2024tadm"
 		}
 	},
 	"variables": {
@@ -704,6 +708,37 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_Wait')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TG_Storage')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_Validation",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/output/blobs/PRODFILES",
+					"blobPathEndsWith": ".txt",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('TG_Storage_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_Validation')]"
 			]
 		}
 	]
