@@ -19,9 +19,6 @@
 		},
 		"LS_SQLDB_properties_typeProperties_userName": {
 			"value": "admintadm"
-		},
-		"TG_Storage_properties_typeProperties_scope": {
-			"value": "/subscriptions/d38e295c-935f-422a-b557-6b00aee34e0e/resourceGroups/TadmTraining2024/providers/Microsoft.Storage/storageAccounts/blob2024tadm"
 		}
 	}
 }
