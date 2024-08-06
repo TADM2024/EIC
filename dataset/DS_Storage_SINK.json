@@ -1,0 +1,18 @@
+{
+	"name": "DS_Storage_SINK",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_StorageAccount",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "PROD",
+				"container": "input"
+			}
+		}
+	}
+}
