@@ -72,8 +72,6 @@
 				"          JOB,",
 				"          MGR,",
 				"          HIREDATE,",
-				"          SAL,",
-				"          COMM,",
 				"          DEPTNO",
 				"     )) ~> sink1"
 			]
