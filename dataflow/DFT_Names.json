@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          FULLNAME as string",
@@ -29,7 +33,8 @@
 				"     columnDelimiter: ',',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: true) ~> source1"
+				"     columnNamesAsHeader: true) ~> source1",
+				"source1 derive() ~> derivedColumn1"
 			]
 		}
 	}
