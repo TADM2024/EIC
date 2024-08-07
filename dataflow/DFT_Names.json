@@ -16,11 +16,7 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          FULLNAME as string,",
-				"          {_c1} as string,",
-				"          {_c2} as string,",
-				"          {_c3} as string,",
-				"          {_c4} as string",
+				"          FULLNAME as string",
 				"     ),",
 				"     useSchema: false,",
 				"     allowSchemaDrift: true,",
