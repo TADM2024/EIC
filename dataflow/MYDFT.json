@@ -47,7 +47,6 @@
 				"          MGR,",
 				"          HIREDATE,",
 				"          SAL,",
-				"          COMM,",
 				"          DEPTNO",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
@@ -57,15 +56,26 @@
 				"     format: 'table',",
 				"     store: 'sqlserver',",
 				"     schemaName: 'dbo',",
-				"     tableName: '',",
+				"     tableName: 'EMP',",
 				"     insertable: true,",
 				"     updateable: false,",
 				"     deletable: false,",
 				"     upsertable: false,",
+				"     truncate: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 1,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          EMPNO,",
+				"          ENAME,",
+				"          JOB,",
+				"          MGR,",
+				"          HIREDATE,",
+				"          SAL,",
+				"          COMM,",
+				"          DEPTNO",
+				"     )) ~> sink1"
 			]
 		}
 	}
