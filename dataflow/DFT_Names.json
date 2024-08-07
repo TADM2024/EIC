@@ -15,15 +15,25 @@
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(useSchema: false,",
+				"source(output(",
+				"          FULLNAME as string,",
+				"          {_c1} as string,",
+				"          {_c2} as string,",
+				"          {_c3} as string,",
+				"          {_c4} as string",
+				"     ),",
+				"     useSchema: false,",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'delimited',",
+				"     container: 'adfdemo',",
+				"     folderPath: 'Output',",
+				"     fileName: 'EmpNames.csv',",
 				"     columnDelimiter: ',',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: false) ~> source1"
+				"     columnNamesAsHeader: true) ~> source1"
 			]
 		}
 	}
