@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "MYDFT",
+						"referenceName": "DFT_Names",
 						"type": "DataFlowReference"
 					},
 					"compute": {
